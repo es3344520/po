@@ -4,15 +4,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // 将此替换为你要代理的目标API的URL
-const targetApiUrl = 'https://my-zyvg.onrender.com';
+const targetApiUrl = 'https://my-dvgd.onrender.com';
 
 app.use(express.json());
 
 app.post('/proxy', async (req, res) => {
   try {
-    console.log(`Request body: ${JSON.stringify(req.body)}`);
-    console.log(`Authorization header: Bearer ${process.env.API_SECRET_KEY}`);
-
     const response = await axios.post(targetApiUrl, req.body, {
       headers: {
         'Content-Type': 'application/json',
@@ -24,4 +21,12 @@ app.post('/proxy', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while processing the request.' });
   }
+});
+
+app.get('/get-api-key', (req, res) => {
+  res.json({ apiKey: process.env.API_SECRET_KEY });
+});
+
+app.listen(port, () => {
+  console.log(`Proxy server listening at http://localhost:${port}`);
 });
