@@ -1,18 +1,12 @@
 {
-  "name": "my-api-service",
+  "name": "render-environment-variable-example",
   "version": "1.0.0",
-  "description": "A simple Node.js Express app to serve API keys",
+  "description": "Example of using environment variables in a Render Web Service",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "express": "^4.17.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/my-api-service.git"  // <-- Replace this with your actual repository URL
-  },
-  "author": "Your Name",  // <-- Replace this with your name
-  "license": "MIT"
+  }
 }
