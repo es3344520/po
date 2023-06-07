@@ -23,10 +23,6 @@ app.post('/proxy', async (req, res) => {
   }
 });
 
-app.get('/get-api-key', (req, res) => {
-  res.json({ apiKey: process.env.API_SECRET_KEY });
-});
-
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);
 });
