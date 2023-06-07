@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/api-key', (req, res) => {
-  const apiKey = process.env.API_KEY;
-  res.json({ apiKey });
+app.get('/get-key', (req, res) => {
+  const key = process.env.KEY_NAME;
+  res.json({ key });
 });
 
 app.listen(port, () => {
