@@ -1,12 +1,13 @@
 {
-  "name": "render-environment-variable-example",
+  "name": "api-proxy",
   "version": "1.0.0",
-  "description": "Example of using environment variables in a Render Web Service",
+  "description": "A simple API proxy server",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1"
   }
 }
