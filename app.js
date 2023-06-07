@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // 将此替换为你要代理的目标API的URL
-const targetApiUrl = 'https://my-dvgd.onrender.com';
+const targetApiUrl = 'https://my-zyvg.onrender.com';
 
 app.use(express.json());
 
