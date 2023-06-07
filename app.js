@@ -8,12 +8,12 @@ const targetApiUrl = 'https://my-zyvg.onrender.com';
 
 app.use(express.json());
 
-app.post('/api/proxy', async (req, res) => {
+app.post('/proxy', async (req, res) => {
   try {
     const response = await axios.post(targetApiUrl, req.body, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.API_SECRET_KEY}`,
+        'Authorization': `Bearer ${req.body.apiKey}`, // 使用传递过来的API密钥
       },
     });
     res.json(response.data);
@@ -23,15 +23,24 @@ app.post('/api/proxy', async (req, res) => {
   }
 });
 
-app.get('/api/get-api-key', (req, res) => {
-  // 通过检查请求头中的自定义验证令牌来验证请求
-  const requestToken = req.header('X-Validation-Token');
-  if (requestToken === process.env.VALIDATION_TOKEN) {
-    res.json({ apiKey: process.env.API_SECRET_KEY });
-  } else {
-    res.status(401).json({ error: 'Unauthorized request.' });
+// 新的/get-data路由，用于接收来自Tampermonkey脚本的请求
+app.post('/get-data', async (req, res) => {
+  try {
+    const response = await axios.post('/proxy', {
+      ...req.body,
+      apiKey: process.env.API_SECRET_KEY, // 将API密钥作为请求的一部分传递给/proxy路由
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while processing the request.' });
   }
 });
+
+// 删除不再需要的/get-api-key路由
+// app.get('/get-api-key', (req, res) => {
+//   res.json({ apiKey: process.env.API_SECRET_KEY });
+// });
 
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);
