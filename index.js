@@ -1,7 +1,4 @@
 const express = require('express');
-const fetch = require('node-fetch');
-const btoa = require('btoa');
-const atob = require('atob');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,9 +14,7 @@ app.get('/data', async (req, res) => {
   }
   
   try {
-    const decodedEncVal = atob(encodedVal);
-    const decodedCustomCode = atob(customCode);
-    const result = { decodedEncVal, decodedCustomCode };
+    const result = { encodedVal, customCode };
     res.json(result);
   } catch (error) {
     res.status(500).send('Error fetching data');
