@@ -1,15 +1,25 @@
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
+const fetch = require('node-fetch');
+const btoa = require('btoa');
+const atob = require('atob');
 
-app.get('/api/key', (req, res) => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) {
-    return res.status(500).json({ error: 'API key not found in environment variables' });
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const encodedVal = "TUpmYllNeTlqbVp4R2NPZzJTVCt5dDNhdSswR3NjUFFBSUJwT2VvbS9vaz0";
+const customCode = "YXNka2Rvc2lmb213a2ppYQ";
+
+app.get('/data', async (req, res) => {
+  try {
+    const decodedEncVal = atob(encodedVal);
+    const decodedCustomCode = atob(customCode);
+    const result = { decodedEncVal, decodedCustomCode };
+    res.json(result);
+  } catch (error) {
+    res.status(500).send('Error fetching data');
   }
-  res.json({ key: apiKey });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
