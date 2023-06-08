@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.get('/get-password', (req, res) => {
-  const password = process.env.PASSWORD_KEY;
-  res.json({ password });
+app.get('/api/key', (req, res) => {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'API key not found in environment variables' });
+  }
+  res.json({ key: apiKey });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
