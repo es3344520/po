@@ -1,13 +1,12 @@
 {
-  "name": "api-proxy",
+  "name": "api-service",
   "version": "1.0.0",
-  "description": "A simple API proxy server",
-  "main": "app.js",
+  "description": "A simple API service",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "express": "^4.17.1"
   }
 }
