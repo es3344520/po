@@ -1,28 +1,10 @@
-const express = require('express');
-const axios = require('axios');
+const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
 
-// 将此替换为你要代理的目标API的URL
-const targetApiUrl = 'https://my-zyvg.onrender.com';
-
-app.use(express.json());
-
-app.post('/proxy', async (req, res) => {
-  try {
-    const response = await axios.post(targetApiUrl, req.body, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.API_SECRET_KEY}`,
-      },
-    });
-    res.json(response.data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred while processing the request.' });
-  }
+app.get("/get-password", (req, res) => {
+  const password = process.env.MY_PASSWORD;
+  res.json({ password });
 });
 
-app.listen(port, () => {
-  console.log(`Proxy server listening at http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
