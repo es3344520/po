@@ -1,7 +1,7 @@
 {
-  "name": "api-service",
+  "name": "render-env-variables",
   "version": "1.0.0",
-  "description": "A simple API service",
+  "description": "A simple web service to demonstrate environment variables on Render",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
