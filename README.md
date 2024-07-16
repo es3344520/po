@@ -1,1 +1,1 @@
-greasyfork.org   部署插件用
+greasyfork.org   poe部署插件用
